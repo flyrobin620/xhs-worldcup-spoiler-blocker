@@ -1,0 +1,33 @@
+/* Elements the spoiler blocker hides. Kept in CSS so it loads at
+   document_start and can suppress spoiler content before first paint. */
+.xhs-spoiler-hidden {
+  display: none !important;
+}
+
+/* Mask spoiler video covers. The `xhs-guard-posters` class is added to <html>
+   by the content script at document_start, so the original poster image never
+   paints (no spoiler flash). The `!important` background overrides the page's
+   inline `style="background-image:url(...)"`. */
+html.xhs-guard-posters xg-poster.xgplayer-poster,
+html.xhs-guard-posters .xgplayer-poster {
+  background-image: none !important;
+  background-color: #1c1c1e !important;
+}
+
+html.xhs-guard-posters xg-poster.xgplayer-poster::after,
+html.xhs-guard-posters .xgplayer-poster::after {
+  content: "防剧透 · 封面已隐藏";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff2442;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei",
+    sans-serif;
+  letter-spacing: 1px;
+  /* Never block the play button or other controls beneath the cover. */
+  pointer-events: none;
+}
