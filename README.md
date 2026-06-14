@@ -107,6 +107,7 @@ update the selectors near the top of [`content.js`](content.js):
 | Home container     | `.xhs-world-cup-home`                            |
 | Schedule to keep   | `.xhs-world-cup-home-section-header-schedule`    |
 | Match cards/buttons to keep | `.xhs-match-card`, `.xhs-match-nav-btn`, `.xhs-match-all-entry` |
+| Match highlight blurb to hide | `.xhs-match-card-match-highlight`              |
 | Score span         | `.xhs-match-card-vs`                             |
 | Replay author name | `.username` (text `世界杯高清回放`)              |
 | Note title         | `#detail-title`                                  |

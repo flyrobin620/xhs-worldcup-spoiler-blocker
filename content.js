@@ -117,6 +117,16 @@
     })(home);
 
     maskScores(home);
+    hideHighlights(home);
+  }
+
+  /**
+   * Hide the match-card highlight blurb (e.g. "维尼修斯救主 巴西战平摩洛哥"),
+   * which spoils the result in text form even though the card is kept visible.
+   */
+  function hideHighlights(root) {
+    const scope = root || document;
+    scope.querySelectorAll('.xhs-match-card-match-highlight').forEach(hide);
   }
 
   /**
