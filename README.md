@@ -62,6 +62,16 @@ without knowing the result in advance.
 
 If the author is anyone else, the page is left untouched.
 
+### Match livestream page
+`https://www.xiaohongshu.com/livestream/<id>?source=worldcup26_web_main`
+
+- On a World Cup match livestream (opened from the World Cup hub, i.e. the URL
+  carries `source=worldcup26_web_main`), the rolling live-chat messages
+  (`.live-chat`) constantly reveal the current score, so the chat container is
+  hidden.
+- Livestreams opened from anywhere else (no `worldcup26_web_main` source) are
+  left untouched.
+
 ## Enable / disable
 
 Click the extension's toolbar icon to open a small popup with an on/off switch.
@@ -114,6 +124,7 @@ update the selectors near the top of [`content.js`](content.js):
 | Note content       | `.note-content`                                  |
 | Comments           | `.comments-container`                            |
 | Video cover poster | `.xgplayer-poster`                               |
+| Live chat to hide  | `.live-chat` (livestream `?source=worldcup26_web_main`) |
 
 The `data-v-*` attributes from the page are intentionally **not** used as
 selectors because they are Vue build hashes that change between releases; class

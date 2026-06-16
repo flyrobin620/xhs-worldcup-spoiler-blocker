@@ -21,6 +21,9 @@
 
   const HIDDEN_CLASS = 'xhs-spoiler-hidden';
   const REPLAY_USERNAME = '世界杯高清回放';
+  // Live chat container on World Cup match livestreams; its rolling messages
+  // routinely reveal the current score, so it is hidden on those pages.
+  const LIVE_CHAT_SELECTOR = '.live-chat';
   const MASKED_SCORE = '? : ?';
   const ORIGINAL_ATTR = 'data-xhs-original-score';
   // Class added to <html> to mask video covers via CSS (see styles.css).
@@ -218,6 +221,18 @@
     }
   }
 
+  /**
+   * Match livestream page: on a World Cup match livestream (opened from the
+   * World Cup hub, i.e. `?source=worldcup26_web_main`), the rolling live-chat
+   * messages constantly leak the score, so hide the chat container.
+   */
+  function processLivestreamPage() {
+    if (location.pathname.indexOf('/livestream/') === -1) return;
+    const params = new URLSearchParams(location.search);
+    if (params.get('source') !== 'worldcup26_web_main') return;
+    document.querySelectorAll(LIVE_CHAT_SELECTOR).forEach(hide);
+  }
+
   function update() {
     // Evaluated regardless of `enabled` so the cover mask is removed when the
     // feature is turned off.
@@ -227,6 +242,10 @@
 
     if (path.indexOf('worldcup') !== -1) {
       processHomePage();
+    }
+
+    if (path.indexOf('/livestream/') !== -1) {
+      processLivestreamPage();
     }
 
     // A note can be a full page (/explore/, /discovery/item/) or an overlay
